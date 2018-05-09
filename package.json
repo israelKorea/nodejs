@@ -1,0 +1,25 @@
+{
+  "name": "nodeserver",
+  "version": "1.0.0",
+  "description": "server based node project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/israelKorea/nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/israelKorea/nodejs/issues"
+  },
+  "homepage": "https://github.com/israelKorea/nodejs#readme",
+  "devDependencies": {
+    "gulp-uglify": "^3.0.0"
+  },
+  "dependencies": {
+    "underscore": "^1.9.0"
+  }
+}
