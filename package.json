@@ -20,6 +20,9 @@
     "gulp-uglify": "^3.0.0"
   },
   "dependencies": {
+    "express-generator": "^4.16.0",
+    "gulp-uglify": "^3.0.0",
+    "jade": "^1.11.0",
     "underscore": "^1.9.0"
   }
 }
