@@ -32,6 +32,7 @@ for(var i=0; i<5; i++){
 </html>
 `;
   res.send(output);
+});
 app.get('/template', function(req, res){
   res.render('temp', {time: Date(), _title:'JadeTemplate'});
 });
