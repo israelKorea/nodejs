@@ -1,16 +1,3 @@
-$npm install jade --save
-
-express templete engine setting
-
- app.set('view engine', 'jade');
- app.set('views', './vies');
-
- and create views folder (put jade files)
-
-directory structure as follow:
-public
-views
-
 supervisor 를 가지고 노드서버 변경감지할 때마다 재시작한다.
 
 searching jade on google : jade template 

@@ -20,9 +20,14 @@
     "gulp-uglify": "^3.0.0"
   },
   "dependencies": {
+<<<<<<< HEAD
     "express-generator": "^4.16.0",
     "gulp-uglify": "^3.0.0",
     "jade": "^1.11.0",
+=======
+    "jade": "^1.11.0",
+    "pug": "^2.0.3",
+>>>>>>> origin/master
     "underscore": "^1.9.0"
   }
 }
