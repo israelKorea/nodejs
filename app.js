@@ -2,9 +2,8 @@ var express = require('express');
 var app = express();
 
 app.locals.pretty = true;
+app.engine('pug', require('pug').__express);
 app.set('view engine', 'pug');
-app.set('views', './views');
-app.use(express.static('public'));
 app.get('/', function(req, res){
   res.send('Hello World! ~!!');
 });
