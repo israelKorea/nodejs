@@ -1,19 +1,48 @@
 var express = require('express');
 var app = express();
-var url = require('url');
-var sizeOf = require('image-size');
-var imgUrl = 'https://cdn-images-1.medium.com/max/2000/1*bD-kWXVqJO_yksiGsIJpxw.png';
-var options = url.parse(imgUrl);
-var gm = require('gm');
+var bodyParser = require('body-parser');
+
+var rt = '/';
+var rut = '/route';
+var dym = '/dynamic';
+var temp = '/template';
+var lg = '/login';
+var form = '/form';
+var form_rec = '/form_receiver';
+var topic = '/topic';
 
 app.locals.pretty = true;
 app.engine('pug', require('pug').__express);
+app.use(bodyParser.urlencoded({extended: false}));
 app.set('view engine', 'pug');
-app.get('/', function(req, res){
-  res.send('Hello World! ~!!');
+
+app.get(rt, function(req, res){
+  res.render('rootpage', {
+			_url1 : rt
+			, _url2 : rut
+			, _url3 : dym
+			, _url4 : temp
+			, _url5 : lg 
+			, _ur16 : form
+			, _ur17 : form_rec
+			, _ur18 : topic
+  });
 });
 
-
+app.get(topic, function(req, res){
+	var topics = [
+		'javascript'
+		, 'nodejs'
+		, 'express'
+	];
+	var output = `
+		<a href="/topic?id=0">javascript</a><br>
+		<a href="/topic?id=1">nodejs</a><br>
+		<a href="/topic?id=2">express</a><br><br>
+		${topics[req.query.id]}
+	`
+	res.send(output);
+});
 
 app.get('/res', function(res){
   var chunks = [];
@@ -25,25 +54,40 @@ app.get('/res', function(res){
   });
 });
 
-
-app.get('/imgsize', function(req,res){
-  gm(imgUrl).size(function(err, size){
-    if(!err){
-        console.log('width = ' + size.width);
-        console.log('height = ' + size.height);  
-      }
-  });
+app.get(form, function(req, res){
+ res.render('form'); 
 });
 
-app.get('/route', function(req, res){
+
+app.get(form_rec, function(req, res){
+	res.send('Hello, GET');
+	var title = req.query.title;
+	var description = req.query.description;
+	res.send(title+',' + description);
+});
+
+
+
+app.post(form_rec, function(req, res){
+	/*
+	var title = req.body.title;
+	var description = req.body.description;
+	res.send(title +','+ description);
+	*/
+	res.send(req.body);
+});
+
+
+app.get(rut, function(req, res){
   res.send('hi, Route <img src="">');
 });
 
-app.get('/dynamic', function(req, res){
-var lis = '';
-for(var i=0; i<5; i++){
-  lis = lis + '<li>coding</li>';
-}
+
+app.get(dym, function(req, res){
+ var lis = '';
+ for(var i=0; i<5; i++){
+   lis = lis + '<li>coding</li>';
+ }
   var output = `
 <!DOCTYPE html>
 <html>
@@ -61,16 +105,11 @@ for(var i=0; i<5; i++){
   res.send(output);
 });
 
-app.get('/template', function(req, res){
+app.get(temp, function(req, res){
   res.render('temp', {time: Date(), _title:'JadeTemplate'});
 });
 
-app.get('/haeyoon', function(req,res){
-  res.render('haeyoon', {_nm:'Johaeyoon', _cnunt:'SouthKorea'});
-});
-
-
-app.get('/login', function(req, res){
+app.get(lg, function(req, res){
   res.send('<h1>login please</h1>');
 });
 

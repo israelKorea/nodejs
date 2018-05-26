@@ -20,10 +20,12 @@
     "gulp-uglify": "^3.0.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express-generator": "^4.16.0",
     "gulp-generator": "^1.0.0",
     "gulp-uglify": "^3.0.0",
     "pug": "^2.0.3",
+    "socket.io": "^2.1.0",
     "underscore": "^1.9.0"
   }
 }
