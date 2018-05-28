@@ -10,38 +10,39 @@ app.engine('pug', require('pug').__express);
 app.set('view engine', 'pug');
 
 app.get('/topic/new', function(req, res){
-	res.render('new');	
-});
-app.get('/topic', function(req, res){
 	fs.readdir('data', function(err, files){
 		if(err){
 			console.log(err);
 			res.status(500).send('Internal Server Error');
 		}
-		res.render('view', {topics : files});
-	});
+	res.render('new', {topics : files});
+	})
 	
 });
 
-app.get('/topic/:id', function(req, res){
-	var id = req.params.id;
-	
+app.get(['/topic', '/topic/:id'], function(req, res){
 	fs.readdir('data', function(err, files){
 		if(err){
 			console.log(err);
 			res.status(500).send('Internal Server Error');
 		}
 		
-		fs.readFile('data/'+ id, 'utf8', function(err, data){
-		if(err){
-			console.log(err);
-			res.status(500).send('Internal Server Error');
+		var id = req.params.id;	
+		//id 값이 있을 때
+		if(id){
+			fs.readFile('data/'+id, 'utf8', function(err, data){
+				if(err){
+				console.log(err);
+				res.status(500).send('Internal Server Error');
+				}
+				res.render('view', {topics : files, title : id, desc : data});
+			});
+		}else{ //id값이 없을 때
+			res.render('view' , {topics : files
+				, title : 'Welcome to home'
+				, desc : 'node web'});
 		}
-		res.render('view', {topics:files, title:id, desc: data});
-		});
-	});
-	
-	
+	})
 });
 
 app.post('/topic', function(req, res){
@@ -52,7 +53,7 @@ app.post('/topic', function(req, res){
 			console.log(err);
 			res.status(500).send('Internal Server Error');
 		}
-		res.send('Success!');
+		res.redirect('/topic/' + title);
 	});	
 });
 
